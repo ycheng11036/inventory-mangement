@@ -15,10 +15,10 @@ const CardSalesSummary = () => {
   const { data, isLoading, isError } = useGetDashboardMetricsQuery();
   const salesData = data?.salesSummary || [];
 
-  const [timeframe, setTimeFrame] = useState("weekly");
+  const [timeframe, setTimeframe] = useState("weekly");
 
   const totalValueSum =
-    salesData.reduce((sum, curr) => sum + curr.totalValue, 0) || 0;
+    salesData.reduce((acc, curr) => acc + curr.totalValue, 0) || 0;
 
   const averageChangePercentage =
     salesData.reduce((acc, curr, _, array) => {
@@ -38,7 +38,7 @@ const CardSalesSummary = () => {
     : "N/A";
 
   if (isError) {
-    return <div className="m-5"> Failed to fetch data </div>;
+    return <div className="m-5">Failed to fetch data</div>;
   }
 
   return (
@@ -60,9 +60,8 @@ const CardSalesSummary = () => {
             {/* BODY HEADER */}
             <div className="flex justify-between items-center mb-6 px-7 mt-5">
               <div className="text-lg font-medium">
-                <p className="text-xs text-gray-400"> Value </p>
+                <p className="text-xs text-gray-400">Value</p>
                 <span className="text-2xl font-extrabold">
-                  {" "}
                   $
                   {(totalValueSum / 1000000).toLocaleString("en", {
                     maximumFractionDigits: 2,
@@ -78,7 +77,7 @@ const CardSalesSummary = () => {
                 className="shadow-sm border border-gray-300 bg-white p-2 rounded"
                 value={timeframe}
                 onChange={(e) => {
-                  setTimeFrame(e.target.value);
+                  setTimeframe(e.target.value);
                 }}
               >
                 <option value="daily">Daily</option>
@@ -86,9 +85,8 @@ const CardSalesSummary = () => {
                 <option value="monthly">Monthly</option>
               </select>
             </div>
-
             {/* CHART */}
-            <ResponsiveContainer width="100%" height={350} className="px-7">
+            <ResponsiveContainer width="100%" height={325} className="px-7">
               <BarChart
                 data={salesData}
                 margin={{ top: 0, right: 0, left: -25, bottom: 0 }}
@@ -135,8 +133,8 @@ const CardSalesSummary = () => {
           {/* FOOTER */}
           <div>
             <hr />
-            <div className="flex justify-between items-center text-sm px-7 mb-4">
-              <p> {salesData.length || 0} days</p>
+            <div className="flex justify-between items-center mt-6 text-sm px-7 mb-4">
+              <p>{salesData.length || 0} days</p>
               <p className="text-sm">
                 Highest Sales Date:{" "}
                 <span className="font-bold">{highestValueDate}</span>
