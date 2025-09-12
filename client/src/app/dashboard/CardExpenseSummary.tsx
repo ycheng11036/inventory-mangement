@@ -111,7 +111,7 @@ const CardExpenseSummary = () => {
           <div>
             <hr />
             {expenseSummary && (
-              <div className="mt-3 flex justify-between items-center px-7 mb-4">
+              <div className="mt-1 flex justify-between items-center px-7 mb-4">
                 <div className="pt-2">
                   <p className="text-sm">
                     Average:{" "}
