@@ -48,7 +48,7 @@ const Expenses = () => {
     return date.toISOString().split("T")[0];
   };
 
-  const aggregatedData: AggregatedDataItem[] = useMemo(() => {
+  const aggregatedData: AggregateDataItem[] = useMemo(() => {
     const filterd: AggregatedData = expenses
       .filter((data: ExpenseByCategorySummary) => {
         const matchesCategory =
